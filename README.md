@@ -1,8 +1,12 @@
 # EleScrape
 
+[![npm](https://img.shields.io/npm/v/elescrape.svg)](https://www.npmjs.com/package/elescrape)
+[![node](https://img.shields.io/badge/node-%E2%89%A522-blue.svg)](https://nodejs.org)
+[![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
 > 零依赖的浏览器抓包工具：一行命令把页面里的每个请求、响应头和响应体完整落盘，结果可以用脚本再次查询、过滤、导出和复放。
 
-基于 **Chrome DevTools Protocol**，不需要装代理证书、不需要改系统代理、不需要 `npm install` 任何东西。CLI 和库两种用法，可嵌进任意 Node 脚本或 CI 流水线。
+基于 **Chrome DevTools Protocol**，不需要装代理证书、不需要改系统代理、没有运行时依赖。CLI 和库两种用法，可嵌进任意 Node 脚本或 CI 流水线。
 
 ```bash
 node bin/elescrape.js capture --url http://127.0.0.1:8089/ --filter "/api/" --duration 15
@@ -34,12 +38,16 @@ node bin/elescrape.js export .elescrape/20261017-094500-abcd --format csv --out 
 ## 安装
 
 ```bash
-# 直接用（不需要安装）
+# 从 npm 全局安装（推荐）
+npm install -g elescrape
+
+# 或者不安装，临时用一次
+npx elescrape --help
+
+# 从源码跑（开发用）
 git clone https://github.com/ELEboysss/EleScrape.git elescrape
 cd elescrape
 node bin/elescrape.js --help
-
-# 或者链接成全局命令
 npm link          # 之后可以直接用 `elescrape`
 ```
 
