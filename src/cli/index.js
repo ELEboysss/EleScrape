@@ -53,7 +53,7 @@ function generalHelp() {
     '',
     'Run `scrape-tool help <command>` for command-specific options.',
     '',
-    'Docs: https://github.com/OWNER/scrape_tool',
+    'Docs: https://github.com/ELEboysss/EleScrape',
   ].join('\n');
 }
 

@@ -43,10 +43,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OWNER/scrape_tool.git"
+    "url": "git+https://github.com/ELEboysss/EleScrape.git"
   },
   "bugs": {
-    "url": "https://github.com/OWNER/scrape_tool/issues"
+    "url": "https://github.com/ELEboysss/EleScrape/issues"
   },
-  "homepage": "https://github.com/OWNER/scrape_tool#readme"
+  "homepage": "https://github.com/ELEboysss/EleScrape#readme"
 }

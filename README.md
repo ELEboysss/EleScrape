@@ -35,7 +35,7 @@ node bin/scrape-tool.js export .scrape/20261017-094500-abcd --format csv --out r
 
 ```bash
 # 直接用（不需要安装）
-git clone <repo-url> scrape_tool
+git clone https://github.com/ELEboysss/EleScrape.git scrape_tool
 cd scrape_tool
 node bin/scrape-tool.js --help
 
