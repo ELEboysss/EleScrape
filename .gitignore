@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Capture output
+.scrape/
+capture/
+*.jsonl
+bodies/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*

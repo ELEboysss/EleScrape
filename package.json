@@ -1,0 +1,52 @@
+{
+  "name": "scrape-tool",
+  "version": "1.0.0",
+  "description": "Zero-dependency network capture toolkit built on the Chrome DevTools Protocol — capture, inspect, export and replay HTTP traffic from any script.",
+  "type": "module",
+  "bin": {
+    "scrape-tool": "bin/scrape-tool.js"
+  },
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./cli": "./src/cli/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "test": "node --test test/",
+    "test:in-process": "node --test --test-isolation=none test/*.test.js",
+    "test:watch": "node --test --watch test/",
+    "demo": "node examples/demo-server.js",
+    "lint": "node scripts/check-syntax.js"
+  },
+  "keywords": [
+    "cdp",
+    "chrome-devtools-protocol",
+    "packet-capture",
+    "network",
+    "scraping",
+    "http",
+    "har",
+    "cli",
+    "zero-dependency"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OWNER/scrape_tool.git"
+  },
+  "bugs": {
+    "url": "https://github.com/OWNER/scrape_tool/issues"
+  },
+  "homepage": "https://github.com/OWNER/scrape_tool#readme"
+}
