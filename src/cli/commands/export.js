@@ -19,7 +19,7 @@ export const spec = {
     fields: { type: 'string', desc: 'comma-separated CSV columns (default: a useful subset)' },
     bom: { type: 'boolean', default: false, desc: 'prefix CSV with a UTF-8 BOM (Excel-friendly)' },
     pretty: { type: 'boolean', default: false, desc: 'pretty-print --format json' },
-    'base-dir': { type: 'string', default: '.scrape', desc: 'where to look for session names' },
+    'base-dir': { type: 'string', default: '.elescrape', desc: 'where to look for session names' },
   },
   positionals: [{ name: 'session', required: true }],
 };

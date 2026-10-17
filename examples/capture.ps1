@@ -2,11 +2,11 @@
     Scripted capture (PowerShell).
 
     .\examples\capture.ps1
-    .\examples\capture.ps1 -Url http://127.0.0.1:8089/ -OutDir .scrape\scripted
+    .\examples\capture.ps1 -Url http://127.0.0.1:8089/ -OutDir .elescrape\scripted
 #>
 param(
     [string]$Url = 'http://127.0.0.1:8089/',
-    [string]$OutDir = '.scrape\scripted'
+    [string]$OutDir = '.elescrape\scripted'
 )
 
 $ErrorActionPreference = 'Stop'

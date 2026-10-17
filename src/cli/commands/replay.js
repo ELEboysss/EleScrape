@@ -14,7 +14,7 @@ export const spec = {
     'dry-run': { type: 'boolean', default: false, desc: 'print the request instead of sending it' },
     'no-follow': { type: 'boolean', default: false, desc: 'do not follow redirects' },
     'max-output': { type: 'number', default: 2000, desc: 'truncate the response body in the terminal' },
-    'base-dir': { type: 'string', default: '.scrape', desc: 'where to look for session names' },
+    'base-dir': { type: 'string', default: '.elescrape', desc: 'where to look for session names' },
   },
   positionals: [{ name: 'session', required: true }],
 };

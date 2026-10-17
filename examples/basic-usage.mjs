@@ -9,7 +9,7 @@ import { capture } from '../src/index.js';
 
 const result = await capture({
   url: process.env.TARGET_URL || 'http://127.0.0.1:8089/',
-  out: new URL('../.scrape/example', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'),
+  out: new URL('../.elescrape/example', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'),
   include: [/\/api\//],
   navigate: true,
   // Stop on whichever comes first: 15s elapsed, or 5s without new traffic.

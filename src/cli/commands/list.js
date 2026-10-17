@@ -13,13 +13,13 @@ export const spec = {
     status: { type: 'string', desc: 'status filter: 200, 2xx, ">=400", 300-399' },
     format: { type: 'string', default: 'table', choices: ['table', 'json', 'jsonl'], desc: 'output format' },
     limit: { type: 'number', default: 0, desc: 'stop after N matching records (0 = all)' },
-    'base-dir': { type: 'string', default: '.scrape', desc: 'where to look for session names' },
+    'base-dir': { type: 'string', default: '.elescrape', desc: 'where to look for session names' },
   },
   positionals: [{ name: 'session', required: true }],
 };
 
 export const examples = [
-  'elescrape list .scrape/20260101-120000-abcd',
+  'elescrape list .elescrape/20260101-120000-abcd',
   'elescrape list <dir> --filter "/api/" --status 2xx',
   'elescrape list <dir> --format jsonl',
 ];

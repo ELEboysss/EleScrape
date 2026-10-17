@@ -14,7 +14,7 @@ export const spec = {
     body: { type: 'boolean', default: false, desc: 'print the decoded response body' },
     raw: { type: 'boolean', default: false, desc: 'print the raw body file bytes' },
     json: { type: 'boolean', default: false, desc: 'print the whole record as JSON' },
-    'base-dir': { type: 'string', default: '.scrape', desc: 'where to look for session names' },
+    'base-dir': { type: 'string', default: '.elescrape', desc: 'where to look for session names' },
   },
   positionals: [{ name: 'session', required: true }],
 };

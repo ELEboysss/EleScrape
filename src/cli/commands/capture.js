@@ -11,7 +11,7 @@ export const spec = {
     url: { type: 'string', alias: 'u', default: 'about:blank', desc: 'page to open and capture' },
     port: { type: 'number', alias: 'p', default: 9333, desc: 'DevTools port' },
     out: { type: 'string', alias: 'o', desc: 'session directory (default: <base-dir>/<timestamp>)' },
-    'base-dir': { type: 'string', default: '.scrape', desc: 'parent directory for auto-named sessions' },
+    'base-dir': { type: 'string', default: '.elescrape', desc: 'parent directory for auto-named sessions' },
     browser: { type: 'string', desc: 'browser executable (default: auto-detect)' },
     profile: { type: 'string', desc: 'browser profile directory (default: <session>/profile)' },
     attach: { type: 'boolean', default: false, desc: 'never spawn; wait for an external browser' },

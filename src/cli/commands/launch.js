@@ -20,7 +20,7 @@ export const spec = {
     url: { type: 'string', alias: 'u', default: 'about:blank', desc: 'page to open' },
     browser: { type: 'string', desc: 'browser executable (default: auto-detect)' },
     profile: { type: 'string', desc: 'profile directory (default: <base-dir>/profile-<port>)' },
-    'base-dir': { type: 'string', default: '.scrape', desc: 'where the default profile lives' },
+    'base-dir': { type: 'string', default: '.elescrape', desc: 'where the default profile lives' },
     headless: { type: 'boolean', default: false, desc: 'headless mode' },
     wait: { type: 'boolean', default: false, desc: 'keep this process alive until the browser exits' },
     'list-browsers': { type: 'boolean', default: false, desc: 'print detected browsers and exit' },

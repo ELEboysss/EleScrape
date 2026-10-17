@@ -5,7 +5,7 @@ pnpm-lock.yaml
 yarn.lock
 
 # Capture output
-.scrape/
+.elescrape/
 capture/
 *.jsonl
 bodies/

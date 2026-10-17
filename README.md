@@ -6,8 +6,8 @@
 
 ```bash
 node bin/elescrape.js capture --url http://127.0.0.1:8089/ --filter "/api/" --duration 15
-node bin/elescrape.js list .scrape/20261017-094500-abcd --status 2xx
-node bin/elescrape.js export .scrape/20261017-094500-abcd --format csv --out requests.csv
+node bin/elescrape.js list .elescrape/20261017-094500-abcd --status 2xx
+node bin/elescrape.js export .elescrape/20261017-094500-abcd --format csv --out requests.csv
 ```
 
 ---
@@ -55,9 +55,9 @@ node examples/demo-server.js        # http://127.0.0.1:8089/
 node bin/elescrape.js capture --url http://127.0.0.1:8089/ --filter "/api/" --duration 15
 
 # 3. 看结果
-node bin/elescrape.js list .scrape/<session-id>
-node bin/elescrape.js show .scrape/<session-id> --id 3 --body
-node bin/elescrape.js export .scrape/<session-id> --format csv --out requests.csv
+node bin/elescrape.js list .elescrape/<session-id>
+node bin/elescrape.js show .elescrape/<session-id> --id 3 --body
+node bin/elescrape.js export .elescrape/<session-id> --format csv --out requests.csv
 ```
 
 `capture` 默认会自己拉起一个 Chrome，用一个独立 profile（不动你日常的浏览器资料），抓完关窗口就结束。
@@ -77,7 +77,7 @@ elescrape capture --url https://example.com [options]
 | `-u, --url <url>` | 起始地址，连上后自动打开 | `about:blank` |
 | `-p, --port <n>` | DevTools 端口 | `9333` |
 | `-o, --out <dir>` | 指定 session 目录 | `<base-dir>/<时间戳>-<随机>` |
-| `--base-dir <dir>` | 自动命名 session 的父目录 | `.scrape` |
+| `--base-dir <dir>` | 自动命名 session 的父目录 | `.elescrape` |
 | `--browser <path>` | 指定浏览器可执行文件 | 自动探测 |
 | `--profile <dir>` | 浏览器 profile 目录 | `<session>/profile` |
 | `--attach` | 不启动浏览器，等外部浏览器就绪 | `false` |
@@ -156,7 +156,7 @@ elescrape replay <session> --id 139 --set page=1 --set rows=1000
 ## 输出结构
 
 ```
-.scrape/20261017-094500-abcd/
+.elescrape/20261017-094500-abcd/
 ├── meta.json         # 参数、浏览器版本、起止时间、最终统计
 ├── requests.jsonl    # 每条请求一行 JSON
 ├── summary.json      # 收尾汇总，脚本里最好读
@@ -203,7 +203,7 @@ import { capture } from 'elescrape';
 
 const { summary, dir } = await capture({
   url: 'http://127.0.0.1:8089/',
-  out: '.scrape/scripted',
+  out: '.elescrape/scripted',
   include: [/\/api\//],
   duration: 15,
   onRecord: (r) => console.log(r.status, r.method, r.url),
@@ -217,7 +217,7 @@ console.log(summary.requests, 'requests captured into', dir);
 ```js
 import { Session, Recorder, TargetWatcher, CdpConnection } from 'elescrape';
 
-const session = Session.create({ dir: '.scrape/manual' });
+const session = Session.create({ dir: '.elescrape/manual' });
 const recorder = new Recorder({ session, options: { include: [/api/] } });
 const watcher = new TargetWatcher({ port: 9333 });
 
