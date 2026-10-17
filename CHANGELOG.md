@@ -6,6 +6,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-10-17
+
+### Fixed
+
+- `--json` output now tags every line with an `event` field (`record` or
+  `summary`). It previously used `type`, which the record's own `type` (the
+  resource type) overwrote, so consumers could not tell a record from the
+  summary. **Behaviour change:** anything matching on `type == "record"`
+  must switch to `event == "record"`.
+
+### Changed
+
+- The browser profile no longer lives inside the session directory. Profiles
+  now go to `<base-dir>/profiles/`, so a capture directory contains only the
+  capture. By default a per-session profile is created and deleted again;
+  `--reuse-profile` shares one profile so logins survive between runs, and
+  `--keep-profile` keeps the throw-away one for debugging.
+- `launch` stores its profile at `<base-dir>/profiles/browser-<port>`.
+
 ## [1.0.0] - 2026-10-17
 
 ### Added

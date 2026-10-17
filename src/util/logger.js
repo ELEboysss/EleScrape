@@ -80,7 +80,9 @@ export function createLogger({ level = 'info', json = false, color = undefined }
     /** Emit one completed record. */
     record(rec) {
       if (json) {
-        process.stdout.write(`${JSON.stringify({ type: 'record', ...rec })}\n`);
+        // `event` rather than `type`: a record carries its own `type`
+        // (the resource type), which would otherwise overwrite the envelope.
+        process.stdout.write(`${JSON.stringify({ event: 'record', ...rec })}\n`);
         return;
       }
       if (threshold < LEVELS.info) return;
@@ -94,7 +96,7 @@ export function createLogger({ level = 'info', json = false, color = undefined }
     /** Emit the final summary object. */
     summary(obj) {
       if (json) {
-        process.stdout.write(`${JSON.stringify({ type: 'summary', ...obj })}\n`);
+        process.stdout.write(`${JSON.stringify({ event: 'summary', ...obj })}\n`);
         return;
       }
       if (threshold < LEVELS.info) return;

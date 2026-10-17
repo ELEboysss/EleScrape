@@ -26,6 +26,7 @@ export {
 export { Recorder } from './core/recorder.js';
 export { TargetWatcher } from './core/targets.js';
 export { CdpConnection, CdpError } from './core/cdp.js';
+export { resolveProfile, removeProfile } from './core/profile.js';
 
 export {
   discoverBrowsers,

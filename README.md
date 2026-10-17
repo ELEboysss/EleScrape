@@ -87,7 +87,9 @@ elescrape capture --url https://example.com [options]
 | `-o, --out <dir>` | 指定 session 目录 | `<base-dir>/<时间戳>-<随机>` |
 | `--base-dir <dir>` | 自动命名 session 的父目录 | `.elescrape` |
 | `--browser <path>` | 指定浏览器可执行文件 | 自动探测 |
-| `--profile <dir>` | 浏览器 profile 目录 | `<session>/profile` |
+| `--profile <dir>` | 显式指定 profile 目录（会保留、且下次复用登录态） | `<base-dir>/profiles/<session>` |
+| `--reuse-profile` | 所有抓包共用 `<base-dir>/profiles/default`，登录态跨次保留 | `false` |
+| `--keep-profile` | 保留本次的一次性 profile（默认用完就删） | `false` |
 | `--attach` | 不启动浏览器，等外部浏览器就绪 | `false` |
 | `--headless` | 无头模式（仅 launch 模式有效） | `false` |
 | `--no-navigate` | 不自动打开 `--url` | 会自动打开 |
@@ -174,6 +176,8 @@ elescrape replay <session> --id 139 --set page=1 --set rows=1000
     └── ...
 ```
 
+浏览器 profile **不在 session 目录里**，而是统一放在 `<base-dir>/profiles/` 下——它有几 MB、几百个文件，混进 session 会把真正有用的东西淹掉。默认每次抓包用一个独立 profile 且用完即删，环境干净；想让登录态跨次保留就用 `--reuse-profile` 或指定 `--profile <dir>`。
+
 `requests.jsonl` 单条记录：
 
 ```json
@@ -203,6 +207,19 @@ elescrape replay <session> --id 139 --set page=1 --set rows=1000
 ```
 
 失败或没有响应体的请求会带 `error` / `bodyError` 字段，记录本身不会丢。
+
+### `--json` 的流式输出
+
+加 `--json` 后 stdout 只输出 NDJSON，一行一个事件，用 `event` 字段区分类型（记录本身也有 `type`，那是资源类型，别混淆）：
+
+```bash
+elescrape capture --url https://example.com --json | jq -r 'select(.event=="record" and .status>=400) | .url'
+```
+
+```json
+{"event":"record","id":1,"method":"GET","url":"http://x/","type":"Document","status":200,...}
+{"event":"summary","requests":4,"bodies":4,"bytes":7986,"failed":1,"sessionDir":"...","stopReason":"duration"}
+```
 
 ## 作为库使用
 

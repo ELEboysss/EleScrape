@@ -13,7 +13,20 @@ export const spec = {
     out: { type: 'string', alias: 'o', desc: 'session directory (default: <base-dir>/<timestamp>)' },
     'base-dir': { type: 'string', default: '.elescrape', desc: 'parent directory for auto-named sessions' },
     browser: { type: 'string', desc: 'browser executable (default: auto-detect)' },
-    profile: { type: 'string', desc: 'browser profile directory (default: <session>/profile)' },
+    profile: {
+      type: 'string',
+      desc: 'explicit browser profile directory (kept, and reused by later runs)',
+    },
+    'reuse-profile': {
+      type: 'boolean',
+      default: false,
+      desc: 'share one persistent profile so logins survive between captures',
+    },
+    'keep-profile': {
+      type: 'boolean',
+      default: false,
+      desc: 'keep the throw-away per-session profile instead of deleting it',
+    },
     attach: { type: 'boolean', default: false, desc: 'never spawn; wait for an external browser' },
     headless: { type: 'boolean', default: false, desc: 'headless mode (launch only)' },
     navigate: { type: 'boolean', default: true, desc: 'open --url after attaching (--no-navigate to skip)' },
@@ -38,6 +51,7 @@ export const examples = [
   'elescrape capture --url http://example.com',
   'elescrape capture --url http://example.com --filter "/api/" --duration 30 --json',
   'elescrape capture --attach --port 9222 --url http://example.com',
+  'elescrape capture --url https://intranet.example.com --reuse-profile   # keep the login',
 ];
 
 export async function execute(options) {
@@ -50,6 +64,8 @@ export async function execute(options) {
     baseDir: path.resolve(options['base-dir']),
     browser: options.browser,
     profile: options.profile,
+    reuseProfile: options['reuse-profile'],
+    keepProfile: options['keep-profile'],
     attach: options.attach,
     headless: options.headless,
     navigate: options.navigate,

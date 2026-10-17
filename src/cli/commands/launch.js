@@ -19,8 +19,8 @@ export const spec = {
     port: { type: 'number', alias: 'p', default: 9333, desc: 'DevTools port' },
     url: { type: 'string', alias: 'u', default: 'about:blank', desc: 'page to open' },
     browser: { type: 'string', desc: 'browser executable (default: auto-detect)' },
-    profile: { type: 'string', desc: 'profile directory (default: <base-dir>/profile-<port>)' },
-    'base-dir': { type: 'string', default: '.elescrape', desc: 'where the default profile lives' },
+    profile: { type: 'string', desc: 'profile directory (default: <base-dir>/profiles/browser-<port>)' },
+    'base-dir': { type: 'string', default: '.elescrape', desc: 'where the profiles/ folder lives' },
     headless: { type: 'boolean', default: false, desc: 'headless mode' },
     wait: { type: 'boolean', default: false, desc: 'keep this process alive until the browser exits' },
     'list-browsers': { type: 'boolean', default: false, desc: 'print detected browsers and exit' },
@@ -60,7 +60,7 @@ export async function execute(options) {
   const resolved = resolveBrowser({ executable: options.browser });
   const profile = options.profile
     ? path.resolve(options.profile)
-    : path.resolve(options['base-dir'], `profile-${options.port}`);
+    : path.resolve(options['base-dir'], 'profiles', `browser-${options.port}`);
 
   logger.info(`launching ${resolved.name}: ${resolved.path}`);
   logger.info(`profile: ${profile}`);

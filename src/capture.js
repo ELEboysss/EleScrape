@@ -20,6 +20,7 @@ import {
 } from './core/browser.js';
 import { createLogger } from './util/logger.js';
 import { ToolError } from './util/errors.js';
+import { resolveProfile, removeProfile } from './core/profile.js';
 
 /**
  * @typedef {object} CaptureOptions
@@ -55,6 +56,8 @@ export async function capture(options = {}) {
     baseDir = process.cwd(),
     browser: browserPath,
     profile,
+    reuseProfile = false,
+    keepProfile = false,
     attach = false,
     headless = false,
     navigate = true,
@@ -112,6 +115,7 @@ export async function capture(options = {}) {
   };
 
   let child = null;
+  let profileInfo = null;
   const cleanupFns = [];
   let stopped = false;
   let stopReason = 'unknown';
@@ -132,11 +136,18 @@ export async function capture(options = {}) {
   try {
     if (mode === 'launch') {
       openSession();
+      profileInfo = resolveProfile({
+        profile,
+        baseDir,
+        name: path.basename(session.dir),
+        reuse: reuseProfile,
+      });
       logger.info(`launching ${resolved.name}: ${resolved.path}`);
+      logger.info(`profile: ${profileInfo.dir} (${profileInfo.mode})`);
       child = launchBrowser({
         executable: resolved.path,
         port,
-        profileDir: profile || path.join(session.dir, 'profile'),
+        profileDir: profileInfo.dir,
         url: 'about:blank',
         headless,
       });
@@ -155,7 +166,11 @@ export async function capture(options = {}) {
 
     openSession();
     const version = await getBrowserVersion(port);
-    session.setBrowser({ ...version, mode });
+    session.setBrowser({
+      ...version,
+      mode,
+      ...(profileInfo ? { profile: profileInfo.dir, profileMode: profileInfo.mode } : {}),
+    });
     if (version?.browser) logger.debug(`connected: ${version.browser}`);
 
     const recorder = new Recorder({
@@ -253,6 +268,16 @@ export async function capture(options = {}) {
       } catch {
         /* ignore */
       }
+    }
+    // A per-session profile is throw-away unless the caller asked to keep it.
+    // This runs after the browser has been closed, or the files stay locked.
+    if (profileInfo?.ephemeral && !keepProfile) {
+      const removed = removeProfile(profileInfo.dir);
+      logger.debug(
+        removed
+          ? `removed temporary profile ${profileInfo.dir}`
+          : `could not remove temporary profile ${profileInfo.dir}`,
+      );
     }
   }
 }

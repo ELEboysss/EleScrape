@@ -1,6 +1,6 @@
 {
   "name": "elescrape",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Zero-dependency network capture toolkit built on the Chrome DevTools Protocol — capture, inspect, export and replay HTTP traffic from any script.",
   "type": "module",
   "bin": {
