@@ -35,10 +35,10 @@ const ALIASES = {
 function generalHelp() {
   const rows = Object.entries(COMMANDS).map(([name, cmd]) => `  ${name.padEnd(9)} ${cmd.summary}`);
   return [
-    `scrape-tool ${version} — capture and inspect browser traffic from the command line`,
+    `elescrape ${version} — capture and inspect browser traffic from the command line`,
     '',
     'Usage:',
-    '  scrape-tool <command> [options]',
+    '  elescrape <command> [options]',
     '',
     'Commands:',
     ...rows,
@@ -46,12 +46,12 @@ function generalHelp() {
     '  version   Print the version',
     '',
     'Examples:',
-    '  scrape-tool capture --url http://example.com',
-    '  scrape-tool capture --url http://example.com --filter "/api/" --duration 30 --json',
-    '  scrape-tool list .scrape/<session> --status 2xx',
-    '  scrape-tool export .scrape/<session> --format csv --out requests.csv',
+    '  elescrape capture --url http://example.com',
+    '  elescrape capture --url http://example.com --filter "/api/" --duration 30 --json',
+    '  elescrape list .scrape/<session> --status 2xx',
+    '  elescrape export .scrape/<session> --format csv --out requests.csv',
     '',
-    'Run `scrape-tool help <command>` for command-specific options.',
+    'Run `elescrape help <command>` for command-specific options.',
     '',
     'Docs: https://github.com/ELEboysss/EleScrape',
   ].join('\n');
@@ -122,22 +122,22 @@ export async function run(argv = []) {
     return typeof code === 'number' ? code : 0;
   } catch (err) {
     if (err instanceof UsageError) {
-      process.stderr.write(`scrape-tool: ${err.message}\n`);
-      process.stderr.write(`Run \`scrape-tool help ${commandName}\` for usage.\n`);
+      process.stderr.write(`elescrape: ${err.message}\n`);
+      process.stderr.write(`Run \`elescrape help ${commandName}\` for usage.\n`);
       return err.exitCode ?? 2;
     }
     if (err instanceof ToolError) {
-      process.stderr.write(`scrape-tool: ${err.message}\n`);
+      process.stderr.write(`elescrape: ${err.message}\n`);
       return err.exitCode ?? 1;
     }
-    process.stderr.write(`scrape-tool: ${err?.stack ?? err}\n`);
+    process.stderr.write(`elescrape: ${err?.stack ?? err}\n`);
     return 1;
   }
 }
 
 function usageFailure(message) {
-  process.stderr.write(`scrape-tool: ${message}\n`);
-  process.stderr.write('Run `scrape-tool --help` for the command list.\n');
+  process.stderr.write(`elescrape: ${message}\n`);
+  process.stderr.write('Run `elescrape --help` for the command list.\n');
   return 2;
 }
 

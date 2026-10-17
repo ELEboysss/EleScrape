@@ -1,10 +1,10 @@
 {
-  "name": "scrape-tool",
+  "name": "elescrape",
   "version": "1.0.0",
   "description": "Zero-dependency network capture toolkit built on the Chrome DevTools Protocol — capture, inspect, export and replay HTTP traffic from any script.",
   "type": "module",
   "bin": {
-    "scrape-tool": "bin/scrape-tool.js"
+    "elescrape": "bin/elescrape.js"
   },
   "main": "./src/index.js",
   "exports": {

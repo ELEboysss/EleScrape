@@ -3,7 +3,7 @@ import { UsageError } from '../../util/args.js';
 
 export const summary = 'Replay one recorded request against the live server.';
 
-export const usage = 'scrape-tool replay <session> --id <n> [--set key=value] [--dry-run]';
+export const usage = 'elescrape replay <session> --id <n> [--set key=value] [--dry-run]';
 
 export const spec = {
   options: {
@@ -20,9 +20,9 @@ export const spec = {
 };
 
 export const examples = [
-  'scrape-tool replay <dir> --id 139',
-  'scrape-tool replay <dir> --id 139 --set rows=1000 --set page=1',
-  'scrape-tool replay <dir> --id 139 --dry-run',
+  'elescrape replay <dir> --id 139',
+  'elescrape replay <dir> --id 139 --set rows=1000 --set page=1',
+  'elescrape replay <dir> --id 139 --dry-run',
 ];
 
 const HOP_BY_HOP = new Set([

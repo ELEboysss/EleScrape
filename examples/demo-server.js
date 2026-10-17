@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * A tiny demo site so you can try scrape-tool without touching a real server.
+ * A tiny demo site so you can try EleScrape without touching a real server.
  *
  *   node examples/demo-server.js
- *   node bin/scrape-tool.js capture --url http://127.0.0.1:8089/ --filter "/api/"
+ *   node bin/elescrape.js capture --url http://127.0.0.1:8089/ --filter "/api/"
  *
  * Endpoints:
  *   GET  /              login page (form posts to /api/login)
@@ -33,11 +33,11 @@ const LOGIN_PAGE = `<!doctype html>
 <html lang="zh">
 <head>
   <meta charset="utf-8">
-  <title>scrape-tool demo</title>
+  <title>EleScrape demo</title>
   <link rel="stylesheet" href="/assets/app.css">
 </head>
 <body>
-  <h1>scrape-tool demo</h1>
+  <h1>EleScrape demo</h1>
   <form id="login">
     <label>user <input name="username" value="demo"></label>
     <label>pass <input name="password" type="password" value="demo-pass"></label>
@@ -135,5 +135,5 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, '127.0.0.1', () => {
   process.stdout.write(`demo server: http://127.0.0.1:${PORT}/\n`);
-  process.stdout.write(`try: node bin/scrape-tool.js capture --url http://127.0.0.1:${PORT}/ --filter "/api/"\n`);
+  process.stdout.write(`try: node bin/elescrape.js capture --url http://127.0.0.1:${PORT}/ --filter "/api/"\n`);
 });

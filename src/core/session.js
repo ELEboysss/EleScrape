@@ -86,7 +86,7 @@ export class Session {
 
     const session = new Session(target);
     session.meta = {
-      tool: 'scrape-tool',
+      tool: 'elescrape',
       session: path.basename(target),
       startedAt: new Date().toISOString(),
       endedAt: null,
@@ -104,7 +104,7 @@ export class Session {
     const resolved = path.resolve(dir);
     const metaPath = path.join(resolved, SESSION_MARKER);
     if (!fs.existsSync(metaPath)) {
-      throw new ToolError(`not a scrape-tool session (missing meta.json): ${resolved}`);
+      throw new ToolError(`not a elescrape session (missing meta.json): ${resolved}`);
     }
     const session = new Session(resolved);
     session.meta = JSON.parse(fs.readFileSync(metaPath, 'utf8'));
@@ -236,7 +236,7 @@ export function resolveSession(ref, { baseDir = process.cwd() } = {}) {
 
   for (const dir of candidates) {
     if (fs.existsSync(dir) && fs.statSync(dir).isDirectory()) {
-      throw new ToolError(`not a scrape-tool session (missing meta.json): ${dir}`);
+      throw new ToolError(`not a elescrape session (missing meta.json): ${dir}`);
     }
   }
 

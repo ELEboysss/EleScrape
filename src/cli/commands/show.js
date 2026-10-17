@@ -6,7 +6,7 @@ import { UsageError } from '../../util/args.js';
 
 export const summary = 'Print one recorded request/response in full.';
 
-export const usage = 'scrape-tool show <session> --id <n> [--body] [--json]';
+export const usage = 'elescrape show <session> --id <n> [--body] [--json]';
 
 export const spec = {
   options: {
@@ -20,9 +20,9 @@ export const spec = {
 };
 
 export const examples = [
-  'scrape-tool show <dir> --id 12',
-  'scrape-tool show <dir> --id 12 --body',
-  'scrape-tool show <dir> --id 12 --json',
+  'elescrape show <dir> --id 12',
+  'elescrape show <dir> --id 12 --body',
+  'elescrape show <dir> --id 12 --json',
 ];
 
 export async function execute(options, positionals) {

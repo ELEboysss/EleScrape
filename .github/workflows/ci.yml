@@ -32,6 +32,6 @@ jobs:
 
       - name: CLI smoke test
         run: |
-          node bin/scrape-tool.js --version
-          node bin/scrape-tool.js --help
-          node bin/scrape-tool.js help capture
+          node bin/elescrape.js --version
+          node bin/elescrape.js --help
+          node bin/elescrape.js help capture

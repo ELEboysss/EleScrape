@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * scrape-tool CLI entry point.
+ * EleScrape CLI entry point.
  */
 import { run } from '../src/cli/index.js';
 
@@ -9,6 +9,6 @@ run(process.argv.slice(2))
     process.exitCode = code ?? 0;
   })
   .catch((err) => {
-    process.stderr.write(`scrape-tool: ${err?.stack ?? err}\n`);
+    process.stderr.write(`elescrape: ${err?.stack ?? err}\n`);
     process.exitCode = 1;
   });

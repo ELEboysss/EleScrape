@@ -3,7 +3,7 @@ import { compileFilters, formatBytes, recordMatches, renderTable, shortPath } fr
 
 export const summary = 'List the requests recorded in a session.';
 
-export const usage = 'scrape-tool list <session> [options]';
+export const usage = 'elescrape list <session> [options]';
 
 export const spec = {
   options: {
@@ -19,9 +19,9 @@ export const spec = {
 };
 
 export const examples = [
-  'scrape-tool list .scrape/20260101-120000-abcd',
-  'scrape-tool list <dir> --filter "/api/" --status 2xx',
-  'scrape-tool list <dir> --format jsonl',
+  'elescrape list .scrape/20260101-120000-abcd',
+  'elescrape list <dir> --filter "/api/" --status 2xx',
+  'elescrape list <dir> --format jsonl',
 ];
 
 export async function execute(options, positionals) {

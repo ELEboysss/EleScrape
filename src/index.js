@@ -1,5 +1,5 @@
 /**
- * scrape-tool — public library entry point.
+ * EleScrape — public library entry point.
  *
  * Everything exported here is dependency-free and usable from plain Node.
  * The CLI is a thin wrapper around these same primitives.

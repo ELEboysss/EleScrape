@@ -6,7 +6,7 @@ import { UsageError } from '../../util/args.js';
 
 export const summary = 'Export recorded requests to JSON, JSONL or CSV.';
 
-export const usage = 'scrape-tool export <session> --format jsonl|csv|json [--out file]';
+export const usage = 'elescrape export <session> --format jsonl|csv|json [--out file]';
 
 export const spec = {
   options: {
@@ -25,9 +25,9 @@ export const spec = {
 };
 
 export const examples = [
-  'scrape-tool export <dir> --format csv --out requests.csv',
-  'scrape-tool export <dir> --filter "/api/" --format jsonl',
-  'scrape-tool export <dir> --format csv --fields id,method,url,status,body.textFile',
+  'elescrape export <dir> --format csv --out requests.csv',
+  'elescrape export <dir> --filter "/api/" --format jsonl',
+  'elescrape export <dir> --format csv --fields id,method,url,status,body.textFile',
 ];
 
 const DEFAULT_CSV_FIELDS = [

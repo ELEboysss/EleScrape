@@ -26,7 +26,7 @@ test('Session.create writes meta.json and a bodies directory', async () => {
 
   const meta = readSessionMeta(dir);
   assert.equal(meta.options.url, 'http://x');
-  assert.equal(meta.tool, 'scrape-tool');
+  assert.equal(meta.tool, 'elescrape');
   await session.close({ stopReason: 'test' });
   assert.ok(fs.existsSync(path.join(dir, 'summary.json')));
 });

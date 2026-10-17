@@ -11,7 +11,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $node = (Get-Command node).Source
-$cli = Join-Path $PSScriptRoot '..\bin\scrape-tool.js'
+$cli = Join-Path $PSScriptRoot '..\bin\elescrape.js'
 
 Write-Host "-> capturing $Url into $OutDir"
 & $node $cli capture --url $Url --out $OutDir --filter '/api/' --duration 15 --quiet

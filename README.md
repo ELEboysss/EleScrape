@@ -1,13 +1,13 @@
-# scrape-tool
+# EleScrape
 
 > 零依赖的浏览器抓包工具：一行命令把页面里的每个请求、响应头和响应体完整落盘，结果可以用脚本再次查询、过滤、导出和复放。
 
 基于 **Chrome DevTools Protocol**，不需要装代理证书、不需要改系统代理、不需要 `npm install` 任何东西。CLI 和库两种用法，可嵌进任意 Node 脚本或 CI 流水线。
 
 ```bash
-node bin/scrape-tool.js capture --url http://127.0.0.1:8089/ --filter "/api/" --duration 15
-node bin/scrape-tool.js list .scrape/20261017-094500-abcd --status 2xx
-node bin/scrape-tool.js export .scrape/20261017-094500-abcd --format csv --out requests.csv
+node bin/elescrape.js capture --url http://127.0.0.1:8089/ --filter "/api/" --duration 15
+node bin/elescrape.js list .scrape/20261017-094500-abcd --status 2xx
+node bin/elescrape.js export .scrape/20261017-094500-abcd --format csv --out requests.csv
 ```
 
 ---
@@ -35,12 +35,12 @@ node bin/scrape-tool.js export .scrape/20261017-094500-abcd --format csv --out r
 
 ```bash
 # 直接用（不需要安装）
-git clone https://github.com/ELEboysss/EleScrape.git scrape_tool
-cd scrape_tool
-node bin/scrape-tool.js --help
+git clone https://github.com/ELEboysss/EleScrape.git elescrape
+cd elescrape
+node bin/elescrape.js --help
 
 # 或者链接成全局命令
-npm link          # 之后可以直接用 `scrape-tool`
+npm link          # 之后可以直接用 `elescrape`
 ```
 
 要求 **Node.js ≥ 22**（需要内置的全局 `WebSocket`）。用 `node --version` 确认。
@@ -52,12 +52,12 @@ npm link          # 之后可以直接用 `scrape-tool`
 node examples/demo-server.js        # http://127.0.0.1:8089/
 
 # 2. 抓 15 秒，只记录 /api/ 下的请求
-node bin/scrape-tool.js capture --url http://127.0.0.1:8089/ --filter "/api/" --duration 15
+node bin/elescrape.js capture --url http://127.0.0.1:8089/ --filter "/api/" --duration 15
 
 # 3. 看结果
-node bin/scrape-tool.js list .scrape/<session-id>
-node bin/scrape-tool.js show .scrape/<session-id> --id 3 --body
-node bin/scrape-tool.js export .scrape/<session-id> --format csv --out requests.csv
+node bin/elescrape.js list .scrape/<session-id>
+node bin/elescrape.js show .scrape/<session-id> --id 3 --body
+node bin/elescrape.js export .scrape/<session-id> --format csv --out requests.csv
 ```
 
 `capture` 默认会自己拉起一个 Chrome，用一个独立 profile（不动你日常的浏览器资料），抓完关窗口就结束。
@@ -69,7 +69,7 @@ node bin/scrape-tool.js export .scrape/<session-id> --format csv --out requests.
 把流量记录进一个 session 目录。
 
 ```bash
-scrape-tool capture --url https://example.com [options]
+elescrape capture --url https://example.com [options]
 ```
 
 | 选项 | 说明 | 默认 |
@@ -105,8 +105,8 @@ scrape-tool capture --url https://example.com [options]
 单独启动一个带调试端口的浏览器，然后由别的命令/脚本去连。适合把"浏览器生命周期"和"抓包"拆开。
 
 ```bash
-scrape-tool launch --port 9333 --url http://example.com
-scrape-tool launch --list-browsers          # 看看探测到了哪些浏览器
+elescrape launch --port 9333 --url http://example.com
+elescrape launch --list-browsers          # 看看探测到了哪些浏览器
 ```
 
 ### `list`
@@ -114,9 +114,9 @@ scrape-tool launch --list-browsers          # 看看探测到了哪些浏览器
 按表格（或 JSON）列出记录。
 
 ```bash
-scrape-tool list <session>
-scrape-tool list <session> --filter "/api/" --status 2xx --type XHR
-scrape-tool list <session> --format jsonl | jq -r 'select(.status>=400) | .url'
+elescrape list <session>
+elescrape list <session> --filter "/api/" --status 2xx --type XHR
+elescrape list <session> --format jsonl | jq -r 'select(.status>=400) | .url'
 ```
 
 `--status` 支持 `200`、`2xx`、`>=400`、`300-399`。
@@ -126,8 +126,8 @@ scrape-tool list <session> --format jsonl | jq -r 'select(.status>=400) | .url'
 打印单条请求的完整信息，加 `--body` 直接看响应正文。
 
 ```bash
-scrape-tool show <session> --id 12 --body
-scrape-tool show <session> --id 12 --json | jq .postData
+elescrape show <session> --id 12 --body
+elescrape show <session> --id 12 --json | jq .postData
 ```
 
 ### `export`
@@ -135,9 +135,9 @@ scrape-tool show <session> --id 12 --json | jq .postData
 导出成 JSON / JSONL / CSV。
 
 ```bash
-scrape-tool export <session> --format csv --out requests.csv
-scrape-tool export <session> --filter "/api/" --format jsonl
-scrape-tool export <session> --format csv --bom --fields id,method,url,status,postData
+elescrape export <session> --format csv --out requests.csv
+elescrape export <session> --filter "/api/" --format jsonl
+elescrape export <session> --format csv --bom --fields id,method,url,status,postData
 ```
 
 CSV 默认不带 BOM（对 `grep`/`awk` 友好）；要让 Excel 正确识别中文就加 `--bom`。
@@ -147,8 +147,8 @@ CSV 默认不带 BOM（对 `grep`/`awk` 友好）；要让 Excel 正确识别中
 把记录下来的请求原样再发一次，复用的是记录里的头部（含 Cookie）。
 
 ```bash
-scrape-tool replay <session> --id 139 --dry-run           # 只看不发
-scrape-tool replay <session> --id 139 --set page=1 --set rows=1000
+elescrape replay <session> --id 139 --dry-run           # 只看不发
+elescrape replay <session> --id 139 --set page=1 --set rows=1000
 ```
 
 > 这会向真实服务器发请求。`--dry-run` 先看清楚再决定。
@@ -199,7 +199,7 @@ scrape-tool replay <session> --id 139 --set page=1 --set rows=1000
 ## 作为库使用
 
 ```js
-import { capture } from 'scrape-tool';
+import { capture } from 'elescrape';
 
 const { summary, dir } = await capture({
   url: 'http://127.0.0.1:8089/',
@@ -215,7 +215,7 @@ console.log(summary.requests, 'requests captured into', dir);
 需要更细粒度控制时，直接用底层组件：
 
 ```js
-import { Session, Recorder, TargetWatcher, CdpConnection } from 'scrape-tool';
+import { Session, Recorder, TargetWatcher, CdpConnection } from 'elescrape';
 
 const session = Session.create({ dir: '.scrape/manual' });
 const recorder = new Recorder({ session, options: { include: [/api/] } });
@@ -255,7 +255,7 @@ chrome.exe --remote-debugging-port=9333 --user-data-dir=D:\tmp\profile ^
            --no-first-run --no-default-browser-check about:blank
 
 # 沙箱内：连上去抓
-node bin/scrape-tool.js capture --attach --port 9333 --url http://example.com
+node bin/elescrape.js capture --attach --port 9333 --url http://example.com
 ```
 
 `--attach` 模式下工具不会碰浏览器进程，也不会自动关它——你关窗口它就结束。
@@ -263,7 +263,7 @@ node bin/scrape-tool.js capture --attach --port 9333 --url http://example.com
 ## 常见问题
 
 **连不上调试端口 / 端口没反应？**
-如果同 profile 的 Chrome 已经在跑，新进程会复用它并**忽略** `--remote-debugging-port`。用一个独立 `--user-data-dir`，或者先关掉已有实例。`scrape-tool launch` 默认就给独立 profile。
+如果同 profile 的 Chrome 已经在跑，新进程会复用它并**忽略** `--remote-debugging-port`。用一个独立 `--user-data-dir`，或者先关掉已有实例。`elescrape launch` 默认就给独立 profile。
 
 **为什么没抓到登录密码？**
 两种情况：一是走了统一身份认证，密码提交在另一个域的 HTTPS 表单里；二是工具默认把 `password`/`pwd`/`mm` 等字段替换成 `<redacted>`。确认需要原始值时用 `--no-redact`，但别把结果提交进仓库。
@@ -278,8 +278,8 @@ node bin/scrape-tool.js capture --attach --port 9333 --url http://example.com
 `list` 里确认分页参数（`page` / `rows`、`offset` / `limit` 之类），再用 `replay` 把 `rows` 调大一次取完，比翻页省事：
 
 ```bash
-scrape-tool list <session> --filter "/api/" --format jsonl | jq -c '.[] | {id, url, postData}'
-scrape-tool replay <session> --id 139 --set rows=1000
+elescrape list <session> --filter "/api/" --format jsonl | jq -c '.[] | {id, url, postData}'
+elescrape replay <session> --id 139 --set rows=1000
 ```
 
 ## 开发

@@ -4,7 +4,7 @@ import { compileFilters, makeLogger, parseSize } from '../shared.js';
 
 export const summary = 'Record browser traffic into a session directory.';
 
-export const usage = 'scrape-tool capture --url <url> [options]';
+export const usage = 'elescrape capture --url <url> [options]';
 
 export const spec = {
   options: {
@@ -35,9 +35,9 @@ export const spec = {
 };
 
 export const examples = [
-  'scrape-tool capture --url http://example.com',
-  'scrape-tool capture --url http://example.com --filter "/api/" --duration 30 --json',
-  'scrape-tool capture --attach --port 9222 --url http://example.com',
+  'elescrape capture --url http://example.com',
+  'elescrape capture --url http://example.com --filter "/api/" --duration 30 --json',
+  'elescrape capture --attach --port 9222 --url http://example.com',
 ];
 
 export async function execute(options) {
@@ -70,9 +70,9 @@ export async function execute(options) {
 
   if (!options.json) {
     logger.info('');
-    logger.info(`inspect : scrape-tool list "${result.dir}"`);
-    logger.info(`show    : scrape-tool show "${result.dir}" --id <n>`);
-    logger.info(`export  : scrape-tool export "${result.dir}" --format jsonl --out out.jsonl`);
+    logger.info(`inspect : elescrape list "${result.dir}"`);
+    logger.info(`show    : elescrape show "${result.dir}" --id <n>`);
+    logger.info(`export  : elescrape export "${result.dir}" --format jsonl --out out.jsonl`);
   }
 
   return 0;

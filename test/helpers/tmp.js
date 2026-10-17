@@ -3,7 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 
 /** Create an empty temporary directory. */
-export function tmpDir(prefix = 'scrape-tool-') {
+export function tmpDir(prefix = 'elescrape-') {
   return fs.mkdtempSync(path.join(os.tmpdir(), prefix));
 }
 

@@ -143,5 +143,5 @@ test('a directory that is not a session is rejected', async () => {
   const dir = tmpDir();
   const { result, stderr } = await captureOutput(() => run(['list', dir]));
   assert.equal(result, 1);
-  assert.match(stderr, /not a scrape-tool session/);
+  assert.match(stderr, /not a elescrape session/);
 });

@@ -7,7 +7,7 @@ set -euo pipefail
 
 URL="${1:-http://127.0.0.1:8089/}"
 OUT_DIR="${2:-.scrape/scripted}"
-CLI="node bin/scrape-tool.js"
+CLI="node bin/elescrape.js"
 
 echo "→ capturing $URL into $OUT_DIR"
 "$CLI" capture \

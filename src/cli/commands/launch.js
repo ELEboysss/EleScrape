@@ -12,7 +12,7 @@ import { UsageError } from '../../util/args.js';
 
 export const summary = 'Start a browser with the DevTools port open (for --attach flows).';
 
-export const usage = 'scrape-tool launch [options]';
+export const usage = 'elescrape launch [options]';
 
 export const spec = {
   options: {
@@ -32,8 +32,8 @@ export const spec = {
 };
 
 export const examples = [
-  'scrape-tool launch --port 9333 --url http://example.com',
-  'scrape-tool launch --list-browsers',
+  'elescrape launch --port 9333 --url http://example.com',
+  'elescrape launch --list-browsers',
 ];
 
 export async function execute(options) {
@@ -94,7 +94,7 @@ export async function execute(options) {
     );
   } else {
     logger.ok(`DevTools endpoint: http://127.0.0.1:${options.port}`);
-    logger.info(`attach with: scrape-tool capture --attach --port ${options.port}`);
+    logger.info(`attach with: elescrape capture --attach --port ${options.port}`);
   }
 
   if (options.wait) {
